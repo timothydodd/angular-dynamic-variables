@@ -1,0 +1,85 @@
+<div class="app-container">
+  <!-- Header Section -->
+  <header class="header">
+    <div class="header-content">
+      <h1 class="app-title">
+        <span class="title-icon">⚙️</span>
+        Configuration Dashboard
+      </h1>
+      <p class="app-subtitle">Your application configuration at a glance</p>
+    </div>
+    <div class="header-accent" [style.background]="getGradientColor()"></div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="config-grid">
+      <!-- API URL Card -->
+      <div class="config-card api-card">
+        <div class="card-header">
+          <span class="card-icon">🌐</span>
+          <h3 class="card-title">API Endpoint</h3>
+        </div>
+        <div class="card-body">
+          <p class="config-value">{{ configService.apiUrl }}</p>
+          <span class="config-label">Base URL for API requests</span>
+        </div>
+        <div class="card-footer">
+          <span class="status-badge" [class.online]="isValidUrl(configService.apiUrl)">
+            {{ isValidUrl(configService.apiUrl) ? 'Valid URL' : 'Check URL' }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Favorite Color Card -->
+      <div class="config-card color-card">
+        <div class="card-header">
+          <span class="card-icon">🎨</span>
+          <h3 class="card-title">Theme Color</h3>
+        </div>
+        <div class="card-body">
+          <div class="color-display">
+            <div class="color-swatch" [style.background-color]="configService.favColor"
+                 [title]="configService.favColor">
+            </div>
+            <p class="config-value">{{ configService.favColor }}</p>
+          </div>
+          <span class="config-label">Primary application color</span>
+        </div>
+      </div>
+
+      <!-- Catchphrase Card -->
+      <div class="config-card phrase-card">
+        <div class="card-header">
+          <span class="card-icon">💬</span>
+          <h3 class="card-title">Catchphrase</h3>
+        </div>
+        <div class="card-body">
+          <p class="config-value catchphrase">{{ configService.favCatchPhrase }}</p>
+          <span class="config-label">Your application motto</span>
+        </div>
+        <div class="card-decoration">
+          <span class="quote-mark">"</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Environment Info -->
+    <div class="environment-info">
+      <div class="env-badge" [class.production]="isProduction">
+        <span class="env-icon">{{ isProduction ? '🚀' : '🔧' }}</span>
+        <span class="env-text">
+          {{ isProduction ? 'Production' : 'Development' }} Mode
+        </span>
+      </div>
+      <p class="env-description">
+        Configuration loaded from {{ configSource }}
+      </p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Built with Angular • Configuration Service Active</p>
+  </footer>
+</div>
